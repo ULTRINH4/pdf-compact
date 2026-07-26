@@ -4,6 +4,7 @@ dist/
 __pycache__/
 *.pyc
 *.spec
+*.exe
 erro.log
 *.tmp_compactando
 *.tmp_juntando

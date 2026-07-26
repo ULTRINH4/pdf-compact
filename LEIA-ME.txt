@@ -26,37 +26,21 @@ O QUE ESTE PROGRAMA FAZ
 
 COMO INSTALAR E USAR (Windows)
 -------------------------------
-1. IMPORTANTE: extraia a pasta "compactador_pdf" de dentro do .zip antes
-   de usar — clique com o botão DIREITO em "compactador_pdf.zip" e
-   escolha "Extrair Tudo..." (Extract All...), depois abra a pasta que
-   foi extraída (ex: para a Área de Trabalho ou Documentos). Rodar o
-   programa direto de dentro do .zip, sem extrair, é a causa mais comum
-   de o programa não abrir. NÃO é preciso instalar nada além do Python
-   (veja abaixo).
+1. Dê um duplo clique no arquivo:
+       Compactador de PDF.exe
 
-2. Se você ainda não tem o Python instalado:
-   - Acesse https://www.python.org/downloads/
-   - Baixe e instale a versão mais recente
-   - IMPORTANTE: na tela de instalação, marque a caixa
-     "Add Python to PATH" antes de clicar em instalar
-   (Isso só precisa ser feito uma vez no computador.)
+   Pronto — é só isso. Esse .exe já vem pronto nesta pasta, funciona
+   sozinho e NÃO precisa instalar Python nem nenhum outro programa. Pode
+   mover só esse arquivo para onde quiser (ex: Área de Trabalho) e, se
+   quiser, apagar o resto da pasta — ele funciona sozinho de qualquer
+   lugar.
 
-3. Dê um duplo clique no arquivo:
-       Abrir Compactador de PDF.vbs
+   (Se o Windows mostrar um aviso do "SmartScreen" dizendo que o
+   aplicativo não é reconhecido, é porque o .exe é novo e ainda não foi
+   baixado por muita gente — clique em "Mais informações" e depois em
+   "Executar assim mesmo". Não é vírus.)
 
-   Na primeira vez, uma janela preta vai aparecer instalando os
-   componentes necessários (leva 1-2 minutos, precisa de internet) — é
-   normal, e serve para você acompanhar e ver qualquer erro, caso
-   aconteça algum. Nas próximas vezes, o programa abre DIRETO, sem
-   nenhuma janela preta — só a janela do programa mesmo, como um
-   programa comum.
-
-   (O arquivo "Compactador de PDF.bat" continua na pasta e funciona
-   igual a antes, com a janela preta sempre visível — use-o só se quiser
-   ver os detalhes do que está acontecendo, ou se o .vbs não funcionar
-   no seu computador por algum motivo.)
-
-4. O programa abrirá uma janela com três abas:
+2. O programa abrirá uma janela com três abas:
    - "Compactar PDF": selecione um ou vários PDFs, escolha o tamanho
      máximo desejado e clique em "Compactar PDF(s)". Os arquivos
      compactados são salvos com o sufixo "_compactado" na mesma pasta do
@@ -100,26 +84,23 @@ COMO INSTALAR E USAR (Windows)
    arquivos grandes. O botão "Cancelar" interrompe o processamento de
    todos os arquivos a qualquer momento.
 
-QUER UM .EXE DE VERDADE (SEM PRECISAR DE PYTHON)?
-----------------------------------------------------
-Este pacote roda como um script Python (por isso precisa do Python
-instalado uma vez). Se você preferir um arquivo .exe único, que funciona
-sozinho e não depende mais do Python instalado, tem um jeito fácil de
-gerar isso:
+SOBRE OS OUTROS ARQUIVOS DA PASTA (uso avançado, opcional)
+------------------------------------------------------------
+Para usar o programa você só precisa do "Compactador de PDF.exe" (veja
+"COMO INSTALAR E USAR" acima) — os arquivos abaixo não são necessários no
+dia a dia, só existem para quem for mexer no código ou publicar uma
+versão nova:
 
-1. Rode primeiro o "Abrir Compactador de PDF.vbs" (ou o .bat) pelo menos
-   uma vez, para os componentes serem instalados.
-2. Depois, dê um duplo clique em:
-       Criar EXE.bat
-   Isso instala uma ferramenta chamada PyInstaller e gera um arquivo
-   "Compactador de PDF.exe" dentro da pasta "dist" (leva 1-2 minutos).
-3. Pode mover esse .exe para onde quiser (ex: Área de Trabalho) e, se
-   preferir, apagar o resto da pasta — o .exe funciona sozinho.
-
-Esse passo só existe porque quem configurou este programa não tinha
-acesso a um computador Windows para gerar o .exe direto; rodando o
-"Criar EXE.bat" no seu próprio computador (que já tem Windows), o .exe é
-gerado localmente em menos de 2 minutos.
+- "app.py", "requirements.txt", "Compactador de PDF.bat",
+  "Abrir Compactador de PDF.vbs": a versão do programa como script Python
+  (o código-fonte). É a partir daqui que o .exe é gerado.
+- "Criar EXE.bat": regenera o "Compactador de PDF.exe" a partir do
+  código-fonte (usa uma ferramenta chamada PyInstaller). Só precisa disso
+  se você alterar o "app.py" e quiser um .exe novo na sua própria máquina.
+- "Publicar Nova Versao.bat": publica uma versão nova no GitHub — é o que
+  faz o auto-update (item 4 acima) funcionar para quem já tem o programa
+  instalado. Veja o repositório em
+  https://github.com/ULTRINH4/pdf-compact
 
 COMO FUNCIONA A COMPACTAÇÃO
 ----------------------------
@@ -142,32 +123,22 @@ propositalmente para nunca deixar texto ou imagens digitalizadas
 ilegíveis. Se mesmo nesse limite máximo o arquivo continuar acima do
 tamanho escolhido, o programa NÃO compacta mais que isso (para não
 arriscar a qualidade) — em vez disso, divide o PDF em partes numeradas,
-cada uma dentro do limite (veja o passo 4 acima). Se uma única página
+cada uma dentro do limite (veja o passo 2 acima). Se uma única página
 sozinha já for maior que o limite escolhido (raro, mas pode acontecer com
 uma imagem de resolução extrema), essa parte específica fica marcada com
 um aviso ⚠, já que não é possível dividir uma página ao meio.
 
 DÚVIDAS FREQUENTES
 --------------------
-- "O programa não abre / nenhuma janela aparece": normalmente é porque o
-  .bat foi executado direto de dentro do .zip, sem extrair antes (veja o
-  passo 1 acima). A partir desta versão, o próprio .bat detecta esse
-  problema e mostra uma mensagem explicando o que fazer. Se mesmo assim
-  não abrir nada, veja se sobrou um arquivo "erro.log" na pasta — ele
-  contém o motivo exato do erro.
-- "Apareceu uma janela preta (console)": se você usou o
-  "Compactador de PDF.bat" diretamente, isso é normal — a janela fica
-  aberta atrás do programa principal enquanto ele roda (assim, qualquer
-  erro aparece nela em vez do programa simplesmente não abrir). Pode
-  ignorá-la; ela fecha sozinha quando você fecha o programa. Se você usou
-  o "Abrir Compactador de PDF.vbs", isso só deve acontecer na primeira
-  vez (durante a instalação) — das próximas vezes em diante não deve
-  aparecer mais nenhuma janela preta.
-- "O Windows mostrou um aviso de segurança ao abrir o .vbs": é uma
-  proteção padrão do Windows para arquivos de script baixados da
-  internet, não é vírus. Se preferir não usar o .vbs por causa disso,
-  pode usar o "Compactador de PDF.bat" normalmente (só vai continuar
-  aparecendo a janela preta).
+- "O programa não abre / nenhuma janela aparece": se você extraiu a pasta
+  inteira de dentro de um .zip, confira se extraiu tudo antes de abrir o
+  .exe (clique direito no .zip → "Extrair Tudo..."), em vez de rodar de
+  dentro do .zip direto. Se mesmo assim não abrir nada, veja se sobrou um
+  arquivo "erro.log" na pasta — ele contém o motivo exato do erro.
+- "O Windows mostrou um aviso do SmartScreen ('O Windows protegeu o
+  computador')": é o aviso padrão para programas novos que ainda não
+  foram baixados por muita gente, não é vírus. Clique em
+  "Mais informações" e depois em "Executar assim mesmo".
 - "O programa parece travado": olhe a barra de progresso e o texto de
   status acima da área de log — se estiverem se movendo/atualizando, o
   programa está processando normalmente. PDFs muito grandes (muitas
