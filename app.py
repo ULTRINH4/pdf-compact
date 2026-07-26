@@ -120,7 +120,7 @@ IMAGE_EXTENSIONS = (
 # --------------------------------------------------------------------------
 # Suba de versão aqui sempre que publicar uma versão nova (veja também
 # "Publicar Nova Versao.bat").
-APP_VERSION = "1.0.0"
+APP_VERSION = "1.0.1"
 _UPDATE_GITHUB_OWNER = "ULTRINH4"
 _UPDATE_GITHUB_REPO = "pdf-compact"
 # Nome só do arquivo temporário baixado — não precisa bater com o nome do
