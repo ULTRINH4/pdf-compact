@@ -1,0 +1,184 @@
+COMPACTADOR DE PDF E FOTOS EM PDF
+===================================
+
+O QUE ESTE PROGRAMA FAZ
+------------------------
+1) Compacta arquivos PDF para ficarem abaixo do tamanho escolhido (12 MB,
+   5 MB, ou outro valor que você digitar) — útil para sistemas judiciais
+   (PJe, e-SAJ, Projudi, etc.) que limitam o tamanho dos arquivos enviados.
+   A compactação NUNCA deixa as imagens ilegíveis; se o arquivo não couber
+   no tamanho escolhido nem no nível máximo de compactação, o programa
+   divide o PDF em partes numeradas (parte1_de_N, parte2_de_N...), cada
+   uma dentro do limite.
+2) Transforma fotos (JPG, PNG, HEIC, etc.) em arquivos PDF, gerando um PDF
+   separado para cada foto selecionada. Essa conversão é direta, sem
+   opções de tamanho máximo (fotos raramente passam do limite).
+3) Junta vários PDFs em um único arquivo, na ordem que você escolher —
+   quando um termina, o próximo começa em seguida. O resultado é sempre
+   1 (um) único arquivo PDF, nunca dividido em partes.
+4) Se atualiza sozinho: toda vez que o programa .exe abre, ele confere em
+   segundo plano se existe uma versão mais nova publicada. Se existir,
+   pergunta se você quer atualizar agora — ao confirmar, o programa baixa
+   a versão nova, fecha e abre de novo sozinho, já atualizado. Não precisa
+   internet para usar o programa normalmente; a checagem é só um "a mais",
+   e se não tiver internet ou o site estiver fora do ar, o programa
+   continua funcionando normalmente sem avisar nada.
+
+COMO INSTALAR E USAR (Windows)
+-------------------------------
+1. IMPORTANTE: extraia a pasta "compactador_pdf" de dentro do .zip antes
+   de usar — clique com o botão DIREITO em "compactador_pdf.zip" e
+   escolha "Extrair Tudo..." (Extract All...), depois abra a pasta que
+   foi extraída (ex: para a Área de Trabalho ou Documentos). Rodar o
+   programa direto de dentro do .zip, sem extrair, é a causa mais comum
+   de o programa não abrir. NÃO é preciso instalar nada além do Python
+   (veja abaixo).
+
+2. Se você ainda não tem o Python instalado:
+   - Acesse https://www.python.org/downloads/
+   - Baixe e instale a versão mais recente
+   - IMPORTANTE: na tela de instalação, marque a caixa
+     "Add Python to PATH" antes de clicar em instalar
+   (Isso só precisa ser feito uma vez no computador.)
+
+3. Dê um duplo clique no arquivo:
+       Abrir Compactador de PDF.vbs
+
+   Na primeira vez, uma janela preta vai aparecer instalando os
+   componentes necessários (leva 1-2 minutos, precisa de internet) — é
+   normal, e serve para você acompanhar e ver qualquer erro, caso
+   aconteça algum. Nas próximas vezes, o programa abre DIRETO, sem
+   nenhuma janela preta — só a janela do programa mesmo, como um
+   programa comum.
+
+   (O arquivo "Compactador de PDF.bat" continua na pasta e funciona
+   igual a antes, com a janela preta sempre visível — use-o só se quiser
+   ver os detalhes do que está acontecendo, ou se o .vbs não funcionar
+   no seu computador por algum motivo.)
+
+4. O programa abrirá uma janela com três abas:
+   - "Compactar PDF": selecione um ou vários PDFs, escolha o tamanho
+     máximo desejado e clique em "Compactar PDF(s)". Os arquivos
+     compactados são salvos com o sufixo "_compactado" na mesma pasta do
+     original (ou na pasta que você escolher).
+   - "Fotos → PDF": selecione uma ou várias fotos e clique em
+     "Converter em PDF". Cada foto vira um arquivo PDF separado, com o
+     mesmo nome da foto — sem opções de tamanho/compactação, é direto.
+   - "Juntar PDF": selecione os PDFs que quer combinar, use os botões
+     "Mover para cima" / "Mover para baixo" para colocá-los na ordem
+     desejada (a lista mostra a numeração 1, 2, 3... dessa ordem), escolha
+     onde salvar o arquivo final e clique em "Juntar PDFs". Os arquivos
+     são combinados nessa ordem — quando um termina de página, o próximo
+     começa em seguida — e o resultado é sempre 1 único arquivo PDF (esta
+     aba nunca divide o resultado em partes, mesmo que fique grande; se
+     precisar de um arquivo menor depois de juntar, use a aba "Compactar
+     PDF" no resultado).
+
+   Na aba "Compactar PDF", o tamanho máximo tem 3 opções:
+     • 12 MB
+     • 5 MB
+     • "Outro tamanho" — digite o valor que quiser em MB
+
+   Se o arquivo não couber no tamanho escolhido mesmo no nível máximo de
+   compactação (sem deixar as imagens ilegíveis), o programa divide o PDF
+   automaticamente em quantas partes forem necessárias, cada uma dentro
+   do limite, salvando como:
+       nome_compactado_parte1_de_3.pdf
+       nome_compactado_parte2_de_3.pdf
+       nome_compactado_parte3_de_3.pdf
+   (Isso não se aplica a fotos convertidas em PDF, já que cada foto vira
+   sempre 1 única página — não há o que dividir.)
+
+   Se você selecionar vários arquivos, eles são compactados/convertidos AO
+   MESMO TEMPO (em paralelo, aproveitando os núcleos do processador), não
+   um de cada vez — por isso processar vários arquivos juntos é bem mais
+   rápido do que rodar o programa várias vezes seguidas.
+
+   Enquanto processa, uma barra de progresso e um contador de arquivos
+   concluídos aparecem na tela — isso é normal e mostra que o programa
+   está trabalhando, mesmo que pareça parado por alguns segundos em
+   arquivos grandes. O botão "Cancelar" interrompe o processamento de
+   todos os arquivos a qualquer momento.
+
+QUER UM .EXE DE VERDADE (SEM PRECISAR DE PYTHON)?
+----------------------------------------------------
+Este pacote roda como um script Python (por isso precisa do Python
+instalado uma vez). Se você preferir um arquivo .exe único, que funciona
+sozinho e não depende mais do Python instalado, tem um jeito fácil de
+gerar isso:
+
+1. Rode primeiro o "Abrir Compactador de PDF.vbs" (ou o .bat) pelo menos
+   uma vez, para os componentes serem instalados.
+2. Depois, dê um duplo clique em:
+       Criar EXE.bat
+   Isso instala uma ferramenta chamada PyInstaller e gera um arquivo
+   "Compactador de PDF.exe" dentro da pasta "dist" (leva 1-2 minutos).
+3. Pode mover esse .exe para onde quiser (ex: Área de Trabalho) e, se
+   preferir, apagar o resto da pasta — o .exe funciona sozinho.
+
+Esse passo só existe porque quem configurou este programa não tinha
+acesso a um computador Windows para gerar o .exe direto; rodando o
+"Criar EXE.bat" no seu próprio computador (que já tem Windows), o .exe é
+gerado localmente em menos de 2 minutos.
+
+COMO FUNCIONA A COMPACTAÇÃO
+----------------------------
+O programa primeiro faz uma limpeza sem perda de qualidade (remove dados
+redundantes do PDF). Se o arquivo ainda estiver acima do limite, ele reduz
+progressivamente a qualidade e a resolução apenas das IMAGENS dentro do
+PDF — o texto (quando existe como texto pesquisável) não é convertido em
+imagem, então continua nítido e pesquisável. O programa usa o tamanho atual
+do arquivo para estimar de cara qual o nível de compactação necessário
+(em vez de testar dezenas de combinações uma por uma), decodifica cada
+imagem apenas uma vez e recompacta várias imagens ao mesmo tempo
+aproveitando os núcleos do processador — por isso costuma terminar em
+poucos segundos, mesmo em PDFs grandes. Esse mesmo aproveitamento dos
+núcleos é compartilhado entre todos os arquivos quando você processa
+vários de uma vez, então selecionar vários arquivos não sobrecarrega o
+computador além do que já acontecia com um arquivo só.
+
+IMPORTANTE: a compactação tem um limite máximo de agressividade, escolhido
+propositalmente para nunca deixar texto ou imagens digitalizadas
+ilegíveis. Se mesmo nesse limite máximo o arquivo continuar acima do
+tamanho escolhido, o programa NÃO compacta mais que isso (para não
+arriscar a qualidade) — em vez disso, divide o PDF em partes numeradas,
+cada uma dentro do limite (veja o passo 4 acima). Se uma única página
+sozinha já for maior que o limite escolhido (raro, mas pode acontecer com
+uma imagem de resolução extrema), essa parte específica fica marcada com
+um aviso ⚠, já que não é possível dividir uma página ao meio.
+
+DÚVIDAS FREQUENTES
+--------------------
+- "O programa não abre / nenhuma janela aparece": normalmente é porque o
+  .bat foi executado direto de dentro do .zip, sem extrair antes (veja o
+  passo 1 acima). A partir desta versão, o próprio .bat detecta esse
+  problema e mostra uma mensagem explicando o que fazer. Se mesmo assim
+  não abrir nada, veja se sobrou um arquivo "erro.log" na pasta — ele
+  contém o motivo exato do erro.
+- "Apareceu uma janela preta (console)": se você usou o
+  "Compactador de PDF.bat" diretamente, isso é normal — a janela fica
+  aberta atrás do programa principal enquanto ele roda (assim, qualquer
+  erro aparece nela em vez do programa simplesmente não abrir). Pode
+  ignorá-la; ela fecha sozinha quando você fecha o programa. Se você usou
+  o "Abrir Compactador de PDF.vbs", isso só deve acontecer na primeira
+  vez (durante a instalação) — das próximas vezes em diante não deve
+  aparecer mais nenhuma janela preta.
+- "O Windows mostrou um aviso de segurança ao abrir o .vbs": é uma
+  proteção padrão do Windows para arquivos de script baixados da
+  internet, não é vírus. Se preferir não usar o .vbs por causa disso,
+  pode usar o "Compactador de PDF.bat" normalmente (só vai continuar
+  aparecendo a janela preta).
+- "O programa parece travado": olhe a barra de progresso e o texto de
+  status acima da área de log — se estiverem se movendo/atualizando, o
+  programa está processando normalmente. PDFs muito grandes (muitas
+  páginas ou imagens de altíssima resolução) podem levar mais tempo. Use
+  o botão "Cancelar" se quiser interromper.
+- "O PDF final não ficou abaixo do limite": normalmente isso não deve
+  acontecer mais, porque o programa divide automaticamente em partes
+  quando necessário. Se ainda assim uma parte específica aparecer com o
+  ícone ⚠, é porque uma única página sozinha (ex: uma foto de resolução
+  extrema) já é maior que o limite escolhido, e não dá pra dividir uma
+  página ao meio. Nesse caso, tente escolher um tamanho máximo maior.
+- "Minhas fotos são .HEIC (iPhone) e não funcionam": o programa já tenta
+  suportar esse formato automaticamente. Se der erro, tente converter a
+  foto para .JPG primeiro (o próprio iPhone permite isso ao compartilhar).

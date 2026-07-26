@@ -1,0 +1,39 @@
+name: Build e Release do Compactador de PDF
+
+# Roda sozinho toda vez que uma tag "vX.Y.Z" é empurrada (veja
+# "Publicar Nova Versao.bat"). Compila o .exe num runner Windows do GitHub
+# e publica como Release — é isso que o app.py (rodando na máquina dos
+# usuários) consulta para saber se tem versão nova.
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Gerar o .exe
+        run: |
+          pyinstaller --onefile --windowed --noconfirm --name "Compactador de PDF" app.py
+
+      - name: Publicar Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: "dist/Compactador de PDF.exe"
+          generate_release_notes: true
