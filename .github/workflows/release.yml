@@ -30,7 +30,7 @@ jobs:
 
       - name: Gerar o .exe
         run: |
-          pyinstaller --onefile --windowed --noconfirm --name "Compactador de PDF" app.py
+          pyinstaller --onefile --windowed --noconfirm --noupx --version-file "version_info.txt" --name "Compactador de PDF" app.py
 
       - name: Publicar Release
         uses: softprops/action-gh-release@v2

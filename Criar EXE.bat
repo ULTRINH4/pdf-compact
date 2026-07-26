@@ -40,8 +40,8 @@ if errorlevel 1 (
 echo.
 echo Gerando o arquivo .exe, pode levar 1 a 2 minutos...
 echo.
-"venv\Scripts\python.exe" -m PyInstaller --onefile --windowed --noconfirm ^
-    --name "Compactador de PDF" app.py
+"venv\Scripts\python.exe" -m PyInstaller --onefile --windowed --noconfirm --noupx ^
+    --version-file "version_info.txt" --name "Compactador de PDF" app.py
 if errorlevel 1 (
     echo.
     echo ================================================================
