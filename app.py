@@ -119,12 +119,15 @@ IMAGE_EXTENSIONS = (
 # Verificação de atualizações (via GitHub Releases)
 # --------------------------------------------------------------------------
 # Suba de versão aqui sempre que publicar uma versão nova (veja também
-# "Publicar Nova Versao.bat"). O nome do asset precisa bater exatamente com
-# o nome gerado pelo "Criar EXE.bat" (--name "Compactador de PDF").
+# "Publicar Nova Versao.bat").
 APP_VERSION = "1.0.0"
 _UPDATE_GITHUB_OWNER = "ULTRINH4"
 _UPDATE_GITHUB_REPO = "pdf-compact"
-_UPDATE_ASSET_NAME = "Compactador de PDF.exe"
+# Nome só do arquivo temporário baixado — não precisa bater com o nome do
+# asset no GitHub. O GitHub troca espaços por pontos no nome dos assets de
+# Release (ex: "Compactador de PDF.exe" vira "Compactador.de.PDF.exe"), então
+# a busca abaixo pega o primeiro asset ".exe" em vez de comparar nomes.
+_UPDATE_ASSET_LOCAL_NAME = "Compactador de PDF.exe"
 
 
 def _parse_version(text):
@@ -178,7 +181,7 @@ def check_for_update_in_background(on_update_found):
                 return
             asset_url = None
             for asset in release.get("assets", []):
-                if asset.get("name") == _UPDATE_ASSET_NAME:
+                if asset.get("name", "").lower().endswith(".exe"):
                     asset_url = asset.get("browser_download_url")
                     break
             if not asset_url:
@@ -197,7 +200,7 @@ def download_and_apply_update(asset_url):
     usuário)."""
     current_exe = os.path.abspath(sys.executable)
     tmp_dir = tempfile.mkdtemp(prefix="pdfcompact_update_")
-    new_exe_path = os.path.join(tmp_dir, _UPDATE_ASSET_NAME)
+    new_exe_path = os.path.join(tmp_dir, _UPDATE_ASSET_LOCAL_NAME)
 
     req = urllib.request.Request(asset_url, headers={"User-Agent": "CompactadorPDF-Updater"})
     with urllib.request.urlopen(req, timeout=120) as resp, open(new_exe_path, "wb") as f:
